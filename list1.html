@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+   <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+
+  <link rel="stylesheet" href="styles.css">
+  <!-- Assuming you've included Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+nav{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  	
+  background: #242526;
+}
+nav .wrapper{
+  position: relative;
+  max-width: 1300px;
+  padding: 0px 30px;
+  height: 70px;
+  line-height: 70px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .logo a{
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.wrapper .nav-links{
+  display: inline-flex;
+}
+.nav-links li{
+  list-style: none;
+}
+.nav-links li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 9px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.nav-links li a:hover{
+  background: #3A3B3C;
+}
+.nav-links .mobile-item{
+  display: none;
+}
+.nav-links .drop-menu{
+  position: absolute;
+  background: #242526;
+  width: 180px;
+  line-height: 45px;
+  top: 85px;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.nav-links li:hover .drop-menu,
+.nav-links li:hover .mega-box{
+  transition: all 0.3s ease;
+  top: 70px;
+  opacity: 1;
+  visibility: visible;
+}
+.drop-menu li a{
+  width: 100%;
+  display: block;
+  padding: 0 0 0 15px;
+  font-weight: 400;
+  border-radius: 0px;
+}
+.mega-box{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 0 30px;
+  top: 85px;
+  opacity: 0;
+  visibility: hidden;
+}
+.mega-box .content{
+  background: #242526;
+  padding: 25px 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.mega-box .content .row{
+  width: calc(25% - 30px);
+  line-height: 45px;
+}
+.content .row img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content .row header{
+  color: #f2f2f2;
+  font-size: 20px;
+  font-weight: 500;
+}
+.content .row .mega-links{
+  margin-left: -40px;
+  border-left: 1px solid rgba(255,255,255,0.09);
+}
+.row .mega-links li{
+  padding: 0 20px;
+}
+.row .mega-links li a{
+  padding: 0px;
+  padding: 0 20px;
+  color: #d9d9d9;
+  font-size: 17px;
+  display: block;
+}
+.row .mega-links li a:hover{
+  color: #f2f2f2;
+}
+.wrapper .btn{
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
+.wrapper .btn.close-btn{
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+
+@media screen and (max-width: 970px) {
+  .wrapper .btn{
+    display: block;
+  }
+  .wrapper .nav-links{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    max-width: 350px;
+    top: 0;
+    left: -100%;
+    background: #242526;
+    display: block;
+    padding: 50px 10px;
+    line-height: 50px;
+    overflow-y: auto;
+    box-shadow: 0px 15px 15px rgba(0,0,0,0.18);
+    transition: all 0.3s ease;
+  }
+  /* custom scroll bar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #242526;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3A3B3C;
+  }
+  #menu-btn:checked ~ .nav-links{
+    left: 0%;
+  }
+  #menu-btn:checked ~ .btn.menu-btn{
+    display: none;
+  }
+  #close-btn:checked ~ .btn.menu-btn{
+    display: block;
+  }
+  .nav-links li{
+    margin: 15px 10px;
+  }
+  .nav-links li a{
+    padding: 0 20px;
+    display: block;
+    font-size: 20px;
+  }
+  .nav-links .drop-menu{
+    position: static;
+    opacity: 1;
+    top: 65px;
+    visibility: visible;
+    padding-left: 20px;
+    width: 100%;
+    max-height: 0px;
+    overflow: hidden;
+    box-shadow: none;
+    transition: all 0.3s ease;
+  }
+  #showDrop:checked ~ .drop-menu,
+  #showMega:checked ~ .mega-box{
+    max-height: 100%;
+  }
+  .nav-links .desktop-item{
+    display: none;
+  }
+  .nav-links .mobile-item{
+    display: block;
+    color: #f2f2f2;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  .nav-links .mobile-item:hover{
+    background: #3A3B3C;
+  }
+  .drop-menu li{
+    margin: 0;
+  }
+  .drop-menu li a{
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  .mega-box{
+    position: static;
+    top: 65px;
+    opacity: 1;
+    visibility: visible;
+    padding: 0 20px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .mega-box .content{
+    box-shadow: none;
+    flex-direction: column;
+    padding: 20px 20px 0 20px;
+  }
+  .mega-box .content .row{
+    width: 100%;
+    margin-bottom: 15px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .mega-box .content .row:nth-child(1),
+  .mega-box .content .row:nth-child(2){
+    border-top: 0px;
+  }
+  .content .row .mega-links{
+    border-left: 0px;
+    padding-left: 15px;
+  }
+  .row .mega-links li{
+    margin: 0;
+  }
+  .content .row header{
+    font-size: 19px;
+  }
+}
+nav input{
+  display: none;
+}
+
+.body-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.body-text div{
+  font-size: 45px;
+  font-weight: 600;
+}
+</style>
+<nav>
+  <div class="wrapper">
+    <div class="logo"><a href="#">TDP</a></div>
+    <input type="radio" name="slider" id="menu-btn">
+    <input type="radio" name="slider" id="close-btn">
+    <ul class="nav-links">
+      <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      
+      <li>
+        <a href="#" class="desktop-item">Mega Menu</a>
+        <input type="checkbox" id="showMega">
+        <label for="showMega" class="mobile-item">Mega Menu</label>
+        <div class="mega-box">
+          <div class="content">
+            <div class="row">
+              <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="">
+            </div>
+            <div class="row">
+              <header>Design Services</header>
+              <ul class="mega-links">
+                <li><a href="#">Graphics</a></li>
+                <li><a href="#">Vectors</a></li>
+                <li><a href="#">Business cards</a></li>
+                <li><a href="#">Custom logo</a></li>
+              </ul>
+            </div>
+            <div class="row">
+              <header>Email Services</header>
+              <ul class="mega-links">
+                <li><a href="#">Personal Email</a></li>
+                <li><a href="#">Business Email</a></li>
+                <li><a href="#">Mobile Email</a></li>
+                <li><a href="#">Web Marketing</a></li>
+              </ul>
+            </div>
+            <div class="row">
+              <header>Security services</header>
+              <ul class="mega-links">
+                <li><a href="#">Site Seal</a></li>
+                <li><a href="#">VPS Hosting</a></li>
+                <li><a href="#">Privacy Seal</a></li>
+                <li><a href="#">Website design</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="logout.php" style="color:yellow">Logout</a></li>
+    </ul>
+    <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+  </div>
+</nav>
+    <form action="Reporting_user.php" method="POST">
+      <h2> Demo</h2>
+      <div class="form-group fullname">
+        <label for="fullname">Customer Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" name="name">
+      </div>
+      <div class="form-group email">
+        <label for="email"> Customer Email ID</label>
+        <input type="email" id="email" placeholder="Enter your Contact email" name="email">
+      </div>
+      <div class="form-group email">
+        <label for="email"> Customer  Address</label>
+        <input type="text" id="email" placeholder="Enter your Customer address" name="address">
+      </div>
+     <div class="form-group email">
+        <label for="email"> Customer  Pincode</label>
+        <input type="number" id="email" placeholder="pincode" name="pincode">
+      </div>
+      <div class="form-group gender">
+        <label >Select Your Brand</label>
+        <select  id="state" onchange="selectDistricts()" name="brand">
+          <option value="" >Select your Brand</option>
+          <option value="MI">MI</option>
+          <option value="Realme">Realme</option>
+	  <option value="oppo">OPPO</option>
+	  <option value="vivo">VIVO</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+	<div class="form-group gender">
+        <label >Select Your Brand Version</label>
+        <select  id="district" name="version">
+         <option value="">Select Version</option>
+        </select>
+      </div>
+	<div class="form-group email">
+        <label for="email"> Model Number</label>
+        <input type="text" id="email" placeholder="Enter your Model Number" name="modelnum">
+      </div>
+	<div class="form-group email">
+        <label for="email"> ISSUE</label>
+        <input type="text" id="email" placeholder="Enter your ISSUE" name="issue">
+      </div>
+      <div class="form-group submit-btn">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+<script>
+function selectDistricts() {
+  var state = document.getElementById("state").value;
+  var districtDropdown = document.getElementById("district");
+  // Clear existing options
+  districtDropdown.innerHTML = "";
+  
+  if(state === "Realme") {
+    var districts = ["realme 1","realme 2","realme 2pro","realme 3","realme 3pro","realme 3i","realme 5","realme 5pro","realme 5s","realme 5i","realme 6","realme 6pro","realme 6i","realme 7","realme7i","realme 7pro","realme 8","realme 8pro","realme 8s","realme 8i","realme 9","realme 9i","realme 9pro","realme 9pro+","realme 10","realme 10pr0","real10pro+","realme10s","realme10t","realme 11","realme 11pr0","realme 11pro+","realme GT","realme GT Neo","realme GT Neoflash","realme GT master","realme GT explorermaster","realme GT Neo2","realme GT Neo2t","realme GT2","realme GT2 pro","realme GT Neo3","realme GT Neo3t","realme GT Neo5","realme GT Neo5SE","realme c1","realme c2","realme c2s","realme c3","realme c3i","realme c11","realme c12","realme c15","realme 17","realme c20","realme c21","realme c21y","realme c25","realme 20a","realme c25s","realme c25y","realme c30","realme c30s","realme 31","realme c33","realme narzo 10","realme narzo 10a","realme narzo 20","realme narzo 20a","realme narzopro","realme narzo 30","realme narzo 30a","realme narzo 30pro","realme narzo 50","realme narzo 50i","realme narzo 50a","realme narzo 50a prime","realme narzo 50pro","realme narzo 50i prime","realme x","realme xlite","realme xT","realme x2","realme x2pro","realme x50","realme x50pro","realme x50m/t","realme 50pr0 play","realme x3","realme x3superzoom","realme x7","realme x7pro","realme x7pro ultra","realme x7 max","realme Q","realme Q2","realme Q2 pro","realme Q2i","realme Q3","realme Q3i","realme Q3 pro","realme Q3 prospecial","realme Q3s","realme Q3t","realme Q5","realme Q5 pro","realme Q5i","realme Q5x","realme V3","realme V5","realme V11","realme V13","realme 11s","realme V23","realme V25","realme V23i", "realme v23s","realme v30","realme U1"];
+    // Add options for Realme Mobiles
+    districts.forEach(function(district) {
+      var option = document.createElement("option");
+      option.text = district;
+      option.value = district.toLowerCase().replace(/\s+/g, '_'); // convert to lowercase with underscore
+      districtDropdown.add(option);
+    });
+  }
+  else if(state === "MI") {
+    var districts = ["11 Ultra","11i 5g","11i Hypercharge 5g","11t Pro 5g","13 Pro","Mi 10","Mi 10i","Mi 10t","Mi 10t Pro","Mi 11 Lite","Mi 11 Lite Ne 5g","Mi 11x","Mi 11x Pro","Mi 12 Pro","Mi A1","Mi A2","Mi A3","Mi Mix 2","Redmi 10","Redmi 10 Power","Redmi 10 Prime","Redmi 10 Prime 2022","Redmi 10a","Redmi 10a Sport","Redmi 11 Prime","Redmi 11 Prime 5g","Redmi 12","Redmi 12 4g","Redmi 12c","Redmi 5","Redmi 5a","Redmi 6","Redmi 6 Pro","Redmi 6a","Redmi 7","Redmi 7a","Redmi 8","Redmi 8a","Redmi 8a Dual","Redmi 9","Redmi 9 Active","Redmi 9 Power","Redmi 9 Prime","Redmi 9a","Redmi 9a Sport","Redmi 9i","Redmi 9i Sport","Redmi A1","Redmi A1+","Redmi A2","Redmi A2+","Redmi K20","Redmi K20 Pro",
+"Redmi K50i 5g","Redmi Note 10","Redmi Note 10 5g","Redmi Note 10 Lite","Redmi Note 10 Pro","Redmi Note 10 Pro Max","Redmi Note 10s","Redmi Note 10t","Redmi Note 11","Redmi Note 11 Pro","Redmi Note 11 Pro Plus","Redmi Note 11 Se","Redmi Note 11s","Redmi Note 11t","Redmi Note 12","Redmi Note 12 5g","Redmi Note 12 Pro 5g","Redmi Note 12 Pro+ 5g","Redmi Note 4","Redmi Note 5","Redmi Note 5 Pro","Redmi Note 6 Pro",
+"Redmi Note 7","Redmi Note 7 Pro","Redmi Note 7s","Redmi Note 8","Redmi Note 8 Pro","Redmi Note 9","Redmi Note 9 Pro","Redmi Note 9 Pro Max","Redmi Y1","Redmi Y2","Redmi Y3"
+];
+    // Add options for MI mobiles 
+    districts.forEach(function(district) {
+      var option = document.createElement("option");
+      option.text = district;
+      option.value = district.toLowerCase().replace(/\s+/g, '_'); // convert to lowercase with underscore
+      districtDropdown.add(option);
+    });
+  }
+else if(state === "oppo") {
+    var districts = ["A11k","A12","A15","A15s","A16","A16e","A16k","A17","A17k","A18","A1k","A31 (2020)","A33","A33 (2020)","A38","A3s","A5","A5 (2020)","A52",
+"A53","A53s","A53s 5g","A54","A55","A57","A58","A5s","A7","A74","A76","A77","A77s","A78","A78 5g","A79 5g","A83","A83 Pro","A9","A9 (2020)","A96","F11","F11 Pro","F15","F17","F17 Pro","F19","F19 Pro","F19 Pro Plus 5g","F19s","F21 Pro","F21 Pro 5g","F23 5g","F3","F9 Pro","Find N2 Flip","Find N3 Flip","Find X","K1","K10","K10 5g","K3","R15 Pro","R17","R17 Pro","Reno 10x Zoom","Reno 2","Reno 2f","Reno 2z",
+"Reno 3 Pro","Reno 4 Pro","Reno 5 Pro","Reno10 5g","Reno10 Pro 5g","Reno10 Pro+ 5g","Reno6","Reno6 5g","Reno6 Pro 5g","Reno7","Reno7 Pro 5g","Reno8 5g","Reno8 Pro 5g","Reno8t 5g"
+];
+    // Add options for oppo mobiles 
+    districts.forEach(function(district) {
+      var option = document.createElement("option");
+      option.text = district;
+      option.value = district.toLowerCase().replace(/\s+/g, '_'); // convert to lowercase with underscore
+      districtDropdown.add(option);
+    });
+  }
+else if(state === "vivo") {
+    var districts = ["S1","S1 Pro","T1 44w","T1 5g","T1 Pro 5g","T1x","T2 5g","T2 Pro 5g","T2x 5g","U20","V11","V11 Pro","V15U10","V15 Pro","V17","V17 Pro","V19","V20","V20 (2021)","V20 Pro","V20 Se","V21 5g","V21e","V21e 5g","V23","V23 Pro 5g","V23e 5g","V25 5g","V25 Pro 5g","V27","V27 Pro 5g","V29 Pro 5g","V29e","V9","X21","X50 Pro","X60","X60 Pro","X60 Pro Plus","X70 Pro","X70 Pro+","X80","X80 Pro","X90","X90 Pro","Y01","Y02","Y02t","Y100 5g","Y100a","Y11","Y11 (2019)","Y12","Y12g","Y12s","Y15","Y15c","Y15s","Y16","Y17","Y19","Y20","Y200 5g",
+"Y20a","Y20g","Y20i","Y20t","Y21a","Y21e","Y21g","Y21t","Y22","Y30","Y31","Y31 (2021)","Y33s","Y33t","Y35","Y3s","Y50","Y51 (2020)","Y51a","Y53s","Y56 5g","Y71","Y71i","Y72","Y73","Y74s","Y75","Y75 5g","Y81","Y83","Y83 Pro","Y90","Y91","Y91i","Y93","Y95","Z10",
+"Z1i","Z1pro","Z1x"];
+    // Add options for oppo mobiles 
+    districts.forEach(function(district) {
+      var option = document.createElement("option");
+      option.text = district;
+      option.value = district.toLowerCase().replace(/\s+/g, '_'); // convert to lowercase with underscore
+      districtDropdown.add(option);
+    });
+  }
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+
+form {
+  padding: 25px;
+  background: #fff;
+  width: 100%;
+  
+  border-radius: 7px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+form h2 {
+  font-size: 27px;
+  text-align: center;
+  margin: 0px 0 30px;
+}
+
+form .form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+form label {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+form input,
+form select {
+  height: 45px;
+  padding: 10px;
+  width: 100%;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #bfbfbf;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #9a9a9a;
+}
+
+form input.error,
+form select.error {
+  border-color: #f91919;
+  background: #f9f0f1;
+}
+
+form small {
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+  color: #f91919;
+}
+
+form .password i {
+  position: absolute;
+  right: 0px;
+  height: 45px;
+  top: 28px;
+  font-size: 13px;
+  line-height: 45px;
+  width: 45px;
+  cursor: pointer;
+  color: #939393;
+  text-align: center;
+}
+
+.submit-btn {
+  margin-top: 30px;
+}
+
+.submit-btn input {
+  color: white;
+  border: none;
+  height: auto;
+  font-size: 16px;
+  padding: 13px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  background: #1BB295;
+  transition: 0.2s ease;
+}
+
+.submit-btn input:hover {
+  background: #179b81;
+}
+</style>
+
+    <script>
+        // Request location permission when the page loads
+        window.onload = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        };
+
+        function showPosition(position) {
+            // You can perform actions with the position data here if needed
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
